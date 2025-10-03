@@ -5,32 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Joinville Cité Forêt</title>
   <style>
+    /* Reset & variables */
+    :root { --fg:#1f2a21; --bg:#ffffff; }
+    html, body { height: 100%; }
+    html { -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      background: #ffffff;
-      color: #1f2a21;
+      background: var(--bg);
+      color: var(--fg);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
+      overflow: hidden; /* évite le scroll quand la barre d'URL mobile change de taille */
     }
+
+    /* Stage plein écran, compatible mobile (claviers/barres dynamiques) */
+    .stage {
+      min-height: 100vh;     /* fallback */
+      min-height: 100dvh;    /* viewport dynamique moderne */
+      min-height: 100svh;    /* small viewport unit (iOS/Android récents) */
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      box-sizing: border-box;
+    }
+
+    figure { margin: 0; }
     img {
-      max-width: 200px;
+      width: clamp(140px, 28vw, 240px);
       height: auto;
-      margin-bottom: 16px;
+      display: block;
+      margin: 0 auto 16px auto;
     }
     h1 {
-      font-size: 24px;
+      font-size: clamp(18px, 3.5vw, 28px);
       margin: 0;
       font-weight: 700;
+      line-height: 1.2;
     }
   </style>
 </head>
 <body>
-  <img src="JCFlogo.jpg" alt="Logo Joinville Cité Forêt" />
-  <h1>Joinville Cité Forêt</h1>
+  <main class="stage" aria-label="Page d'accueil minimaliste">
+    <figure>
+      <img src="JCFlogo.jpg" alt="Logo Joinville Cité Forêt" />
+      <figcaption>
+        <h1>Joinville Cité Forêt</h1>
+      </figcaption>
+    </figure>
+  </main>
 </body>
 </html>
